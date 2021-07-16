@@ -1,7 +1,9 @@
 import React from "react";
 
-//pure function
-const SingIn = ({ onRouteChange }) => {
+//pure function // then changed to state component
+class SingIn extends React.Component {
+  render() {
+    const {onRouteChange} = this.props;
   return (
     //tachyons SignIn
     <article className="br3 ba  b--black-10 mv4 w-100 w-50-m w-25-l mw5 shadow-5 center">
@@ -49,6 +51,7 @@ const SingIn = ({ onRouteChange }) => {
       </article>
     </article>
   );
+}
 };
 
 export default SingIn;

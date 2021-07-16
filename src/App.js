@@ -38,6 +38,7 @@ class App extends Component {
     };
   }
 
+
   calculateFaceLocation = (data) => {
     const clarifaiFace =
       data.outputs[0].data.regions[0].region_info.bounding_box;
@@ -51,6 +52,8 @@ class App extends Component {
       bottomRow: height - clarifaiFace.bottom_row * height,
     };
   };
+
+  
 
   displayFaceBox = (box) => {
     console.log(box);
