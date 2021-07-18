@@ -1,7 +1,35 @@
 import React from "react";
 
 //pure function // then changed to state component
-class SingIn extends React.Component {
+class SignIn extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      signInEmail: '',
+      signInPassword: ''
+    } 
+  }
+
+  onEmailChange = (event) => {
+    this.setState({signInEmail: event.target.value})
+  }
+
+  onPasswordChange = (event) => {
+    this.setState({signInPassword: event.target.value})
+  }
+
+  onSubmitSignIn = () => {
+    fetch('http://localhost:3000/signin', {
+      method:'post',
+      headers: {'content-type':'application/json'},
+      body: JSON.stringify({
+        email: this.state.signInEmail,
+        password: this.state.signInPassword
+      })
+    })
+    this.props.onRouteChange('home');
+  }
+
   render() {
     const {onRouteChange} = this.props;
   return (
@@ -16,10 +44,11 @@ class SingIn extends React.Component {
                 Email address
               </label>
               <input
-                className="pa2 input-reset ba bg-transparent w-100 measure"
+              className="pa2 input-reset ba bg-transparent w-100 measure"
                 type="email"
                 name="email-address"
                 id="email-address"
+                onChange={this.onEmailChange}
               />
             </div>
             <div className="mt3">
@@ -31,12 +60,13 @@ class SingIn extends React.Component {
                 type="password"
                 name="password"
                 id="password"
+                onChange={this.onPasswordChange}
               />
             </div>
           </fieldset>
           <div className="mt3">
             <input
-              onClick={() => onRouteChange('home')}
+              onClick={this.onSubmitSignIn}
               className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6"
               type="submit"
               value="Sign In"
@@ -54,4 +84,4 @@ class SingIn extends React.Component {
 }
 };
 
-export default SingIn;
+export default SignIn;

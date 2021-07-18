@@ -4,7 +4,7 @@ import FaceRecognition from "./components/FaceRecognition/FaceRecognition.js";
 import Logo from "./components/Logo/Logo";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm.js";
 import Rank from "./components/Rank/Rank.js";
-import SingIn from "./components/SingIn/SingIn.js";
+import SignIn from "./components/SignIn/SignIn.js";
 import Register from "./components/Register/Register.js";
 import Particles from "react-particles-js";
 import Clarifai from "clarifai";
@@ -38,6 +38,8 @@ class App extends Component {
     };
   }
 
+
+//the app works on port 3001..dont ask me why
 
   calculateFaceLocation = (data) => {
     const clarifaiFace =
@@ -102,7 +104,7 @@ class App extends Component {
             />
           </div>
         ) : route === "SignIn" ? (
-          <SingIn onRouteChange={this.onRouteChange} />
+          <SignIn onRouteChange={this.onRouteChange} />
         ) : (
           <Register onRouteChange={this.onRouteChange} />
         )}
