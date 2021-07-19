@@ -24,7 +24,7 @@ const particlesOptions = {
       },
     },
   },
-};
+}; 
 
 class App extends Component {
   constructor() {
@@ -33,13 +33,29 @@ class App extends Component {
       input: "",
       imageUrl: "",
       box: {},
-      route: "SignIn",
-      isSignedIn: false
+      route: "signin",
+      isSignedIn: false,
+      user: {
+        id: "",
+        name: "",
+        email: "",
+        entries: 0,
+        joined: ""
+      },
     };
   }
 
+  loadUser = (data) => {
+    this.setState({user: {
+      id: data.id,
+        name: data.name,
+        email: data.email,
+        entries: data.entries,
+        joined: data.joined
+    }})
+  }
 
-//the app works on port 3001..dont ask me why
+  //the app works on port 3001..dont ask me why
 
   calculateFaceLocation = (data) => {
     const clarifaiFace =
@@ -54,8 +70,6 @@ class App extends Component {
       bottomRow: height - clarifaiFace.bottom_row * height,
     };
   };
-
-  
 
   displayFaceBox = (box) => {
     console.log(box);
@@ -85,11 +99,14 @@ class App extends Component {
     this.setState({ route: route });
   };
   render() {
-    const {isSignedIn, imageUrl, route, box} = this.state;
+    const { isSignedIn, imageUrl, route, box } = this.state;
     return (
       <div className="App">
         <Particles className="particles" params={particlesOptions} />
-        <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
+        <Navigation
+          isSignedIn={isSignedIn}
+          onRouteChange={this.onRouteChange}
+        />
         {route === "home" ? (
           <div>
             <Logo />
@@ -98,15 +115,12 @@ class App extends Component {
               onInputChange={this.onInputChange}
               onButtonSubmit={this.onButtonSubmit}
             />
-            <FaceRecognition
-              box={box}
-              imageUrl={imageUrl}
-            />
+            <FaceRecognition box={box} imageUrl={imageUrl} />
           </div>
-        ) : route === "SignIn" ? (
+        ) : route === "signin" ? (
           <SignIn onRouteChange={this.onRouteChange} />
         ) : (
-          <Register onRouteChange={this.onRouteChange} />
+          <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
         )}
       </div>
     );

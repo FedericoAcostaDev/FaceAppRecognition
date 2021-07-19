@@ -1,6 +1,6 @@
 import React from "react";
 
-//pure function // then changed to state component
+//pure function // then changed to state component to have input of email & password
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +27,13 @@ class SignIn extends React.Component {
         password: this.state.signInPassword
       })
     })
-    this.props.onRouteChange('home');
+    .then(Response => Response.json())
+    .then(data => {
+      if (data === 'success') {
+        this.props.onRouteChange('home');
+      }
+    })
+    
   }
 
   render() {
