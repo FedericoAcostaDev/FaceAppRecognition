@@ -3,19 +3,18 @@ import React from "react";
 
 
 //pure function
-const Rank = () => {
+const Rank = ({name, entries}) => {
   return (
     <div>
     <div className="white f3">
-        {'Federico, Your current rank is ...'}
-
+        {`${name} entry counter ...`}
         </div>
     <div className="white f1">
-    {'#5'}
+    {entries}
 
     </div>
     </div>
   );
-};
+}
 
 export default Rank;
