@@ -14,7 +14,9 @@
     "react-tilt": "^0.1.4",
     "react-tsparticles": "^1.30.0",
     "tachyons": "^4.12.0",
-    "node": "^14.17.0"
+    "engines": {
+      "node": "^4.17.0"
+    }
     
   },
   "scripts": {
